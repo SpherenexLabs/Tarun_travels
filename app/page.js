@@ -1,23 +1,22 @@
 import HomeHero from "@/components/sections/HomeHero";
-import AboutSection from "@/components/sections/AboutSection";
-import PackagesSection from "@/components/sections/PackagesSection";
-import ServicesSection from "@/components/sections/ServicesSection";
-import GallerySection from "@/components/sections/GallerySection";
+import FareSection from "@/components/sections/FareSection";
+import RoutesSection from "@/components/sections/RoutesSection";
+import TrustSection from "@/components/sections/TrustSection";
 import ReviewsSection from "@/components/sections/ReviewsSection";
 import ContactSection from "@/components/sections/ContactSection";
 import MapSection from "@/components/sections/MapSection";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "Bengaluru Travel Agency, Tour Packages & Cabs",
+  title: "Cab Booking in Bengaluru | Airport, Local & Outstation",
   description:
-    "Plan South India tours, private outstation cabs, hotel stays and custom holiday packages with Tarun Travel Hub in Bengaluru.",
+    "Book reliable airport taxi, local rental and outstation cabs in Bengaluru with transparent fares and 24/7 support.",
   path: "/",
   keywords: [
-    "travel agency in Bengaluru",
-    "South India tour packages",
+    "cab booking Bengaluru",
+    "airport taxi Bangalore",
     "outstation cabs Bengaluru",
-    "custom holiday packages",
+    "local cab rental Bangalore",
   ],
 });
 
@@ -25,10 +24,11 @@ export default function HomePage() {
   return (
     <>
       <HomeHero />
-      <AboutSection />
-      <PackagesSection />
-      <ServicesSection />
-      <GallerySection />
+      <FareSection type="airport" />
+      <FareSection type="outstation" />
+      <FareSection type="local" />
+      <RoutesSection />
+      <TrustSection />
       <ReviewsSection />
       <ContactSection />
       <MapSection />

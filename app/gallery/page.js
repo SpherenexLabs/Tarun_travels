@@ -4,21 +4,21 @@ import ReviewsSection from "@/components/sections/ReviewsSection";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "Travel Gallery",
+  title: "Cab & Journey Gallery",
   description:
-    "Explore destination and road-trip moments from the journeys planned by Tarun Travel Hub.",
+    "View road journeys, cab travel and destinations served by Tarun Travel Hub.",
   path: "/gallery",
-  keywords: ["South India travel gallery", "holiday destinations", "road trips India"],
+  keywords: ["cab gallery Bengaluru", "outstation taxi journeys", "road trips from Bangalore"],
 });
 
 export default function GalleryPage() {
   return (
     <>
       <PageHero
-        eyebrow="Travel diary"
-        title="A glimpse of the"
-        accent="road ahead."
-        description="Landscapes, heritage and the small moments that turn a trip into a lasting memory."
+        eyebrow="On the road"
+        title="Reliable rides across"
+        accent="every route."
+        description="A glimpse of the city, airport and outstation journeys we serve."
       />
       <GallerySection />
       <ReviewsSection />

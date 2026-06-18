@@ -7,9 +7,9 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata = createPageMetadata({
   title: "About Us",
   description:
-    "Meet the Bengaluru travel team behind Tarun Travel Hub and learn how we plan dependable, personal holidays.",
+    "Meet the Bengaluru cab service team behind Tarun Travel Hub and learn about our reliable vehicles and drivers.",
   path: "/about",
-  keywords: ["Bengaluru travel agency", "trusted tour operator", "holiday planner"],
+  keywords: ["Bengaluru cab service", "trusted taxi operator", "professional cab drivers"],
 });
 
 export default function AboutPage() {
@@ -17,9 +17,9 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="Our story"
-        title="Travel planned with"
+        title="Reliable rides with"
         accent="genuine care."
-        description="Local knowledge, honest guidance and one dependable team from enquiry to homecoming."
+        description="Clean vehicles, professional drivers and clear communication from booking to drop."
       />
       <AboutSection extended />
       <ReviewsSection />

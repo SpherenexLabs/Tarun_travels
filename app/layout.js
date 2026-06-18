@@ -10,15 +10,15 @@ export const metadata = {
   applicationName: siteConfig.name,
   category: "travel",
   title: {
-    default: "Tarun Travel Hub | Cabs, Tours & Holiday Packages",
+    default: "Tarun Travel Hub | Cab Booking in Bengaluru",
     template: "%s | Tarun Travel Hub",
   },
   description:
-    "Explore curated South India tour packages, private cabs, hotel bookings and custom holidays with Tarun Travel Hub.",
+    "Book airport taxi, local rental and outstation cabs in Bengaluru with professional drivers and 24/7 support.",
   openGraph: {
     type: "website",
     siteName: siteConfig.name,
-    title: "Tarun Travel Hub | Cabs, Tours & Holiday Packages",
+    title: "Tarun Travel Hub | Cab Booking in Bengaluru",
     description: siteConfig.description,
     images: ["/travel-hero.png"],
   },
@@ -45,9 +45,9 @@ export default function RootLayout({ children }) {
     siteConfig.facebook,
   ].filter(Boolean);
 
-  const travelAgencySchema = {
+  const taxiServiceSchema = {
     "@context": "https://schema.org",
-    "@type": ["TravelAgency", "LocalBusiness"],
+    "@type": ["TaxiService", "LocalBusiness"],
     name: siteConfig.name,
     description: siteConfig.description,
     url: siteConfig.url,
@@ -67,11 +67,11 @@ export default function RootLayout({ children }) {
     sameAs,
     areaServed: {
       "@type": "AdministrativeArea",
-      name: "India",
+      name: "Bengaluru and South India",
     },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Travel services",
+      name: "Cab services",
       itemListElement: services.map((service) => ({
         "@type": "Offer",
         itemOffered: {
@@ -88,7 +88,7 @@ export default function RootLayout({ children }) {
       <body>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(travelAgencySchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(taxiServiceSchema) }}
         />
         <Header />
         <main>{children}</main>

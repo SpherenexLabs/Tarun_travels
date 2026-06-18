@@ -1,27 +1,31 @@
 "use client";
 
-import { tourPackages } from "@/data/packages";
+import { bookingTypes, cabFleet } from "@/data/cabs";
 import { createWhatsAppUrl } from "@/lib/whatsapp";
 import Icon from "@/components/ui/Icon";
 
 export default function EnquiryForm({
-  defaultDestination = "",
-  defaultPackage = "",
+  defaultDrop = "",
+  defaultCab = "",
+  defaultBookingType = "",
 }) {
   function handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const message = [
-      "Hello Tarun Travel Hub, I would like to make a travel enquiry.",
+      "Hello Tarun Travel Hub, I would like to book a cab.",
       "",
       `Customer name: ${data.get("name")}`,
       `Mobile number: ${data.get("mobile")}`,
-      `Email ID: ${data.get("email")}`,
-      `Destination: ${data.get("destination")}`,
-      `Number of persons: ${data.get("persons")}`,
-      `Travel date: ${data.get("travelDate")}`,
-      `Package interest: ${data.get("packageInterest") || "Custom package"}`,
-      `Message / special requirement: ${data.get("message") || "None"}`,
+      `Email ID: ${data.get("email") || "Not provided"}`,
+      `Pickup location: ${data.get("pickup")}`,
+      `Drop location: ${data.get("drop")}`,
+      `Pickup date: ${data.get("pickupDate")}`,
+      `Pickup time: ${data.get("pickupTime")}`,
+      `Booking type: ${data.get("bookingType")}`,
+      `Preferred cab: ${data.get("cabType") || "Any suitable cab"}`,
+      `Passengers: ${data.get("passengers")}`,
+      `Special requirement: ${data.get("message") || "None"}`,
     ].join("\n");
 
     window.open(createWhatsAppUrl(message), "_blank", "noopener,noreferrer");
@@ -30,124 +34,80 @@ export default function EnquiryForm({
   return (
     <form className="enquiry-form" onSubmit={handleSubmit}>
       <div className="form-heading">
-        <span>Booking enquiry</span>
-        <h3>Plan your perfect trip</h3>
-        <p>Fill in your travel details and our team will contact you with a personalised quote.</p>
+        <span>Cab booking enquiry</span>
+        <h3>Book Your Cab</h3>
+        <p>Enter your journey details and receive fare confirmation on WhatsApp.</p>
       </div>
 
       <div className="form-row">
         <div>
           <label htmlFor="enquiry-name">Customer name *</label>
-          <input
-            autoComplete="name"
-            id="enquiry-name"
-            maxLength={80}
-            name="name"
-            placeholder="Enter your full name"
-            required
-            type="text"
-          />
+          <input autoComplete="name" id="enquiry-name" maxLength={80} name="name" placeholder="Full name" required type="text" />
         </div>
         <div>
           <label htmlFor="enquiry-mobile">Mobile number *</label>
-          <input
-            autoComplete="tel"
-            id="enquiry-mobile"
-            inputMode="tel"
-            maxLength={18}
-            name="mobile"
-            pattern="[0-9+() -]{10,18}"
-            placeholder="+91 00000 00000"
-            required
-            title="Enter a valid mobile number"
-            type="tel"
-          />
+          <input autoComplete="tel" id="enquiry-mobile" inputMode="tel" maxLength={18} name="mobile" pattern="[0-9+() -]{10,18}" placeholder="+91 00000 00000" required title="Enter a valid mobile number" type="tel" />
         </div>
       </div>
 
       <div>
-        <label htmlFor="enquiry-email">Email ID *</label>
-        <input
-          autoComplete="email"
-          id="enquiry-email"
-          maxLength={120}
-          name="email"
-          placeholder="you@example.com"
-          required
-          type="email"
-        />
+        <label htmlFor="enquiry-email">Email ID</label>
+        <input autoComplete="email" id="enquiry-email" maxLength={120} name="email" placeholder="you@example.com" type="email" />
       </div>
 
       <div className="form-row">
         <div>
-          <label htmlFor="enquiry-destination">Travel destination *</label>
-          <input
-            defaultValue={defaultDestination}
-            id="enquiry-destination"
-            list="travel-destinations"
-            maxLength={100}
-            name="destination"
-            placeholder="Where do you want to go?"
-            required
-            type="text"
-          />
-          <datalist id="travel-destinations">
-            {tourPackages.map((item) => (
-              <option value={item.destination} key={item.slug} />
-            ))}
-          </datalist>
+          <label htmlFor="enquiry-pickup">Pickup location *</label>
+          <input id="enquiry-pickup" maxLength={120} name="pickup" placeholder="Enter pickup address" required type="text" />
         </div>
         <div>
-          <label htmlFor="enquiry-persons">Number of persons *</label>
-          <input
-            id="enquiry-persons"
-            max="50"
-            min="1"
-            name="persons"
-            placeholder="2"
-            required
-            type="number"
-          />
+          <label htmlFor="enquiry-drop">Drop location *</label>
+          <input defaultValue={defaultDrop} id="enquiry-drop" maxLength={120} name="drop" placeholder="Enter destination" required type="text" />
         </div>
       </div>
 
       <div className="form-row">
         <div>
-          <label htmlFor="enquiry-date">Travel date *</label>
-          <input id="enquiry-date" name="travelDate" required type="date" />
+          <label htmlFor="enquiry-date">Pickup date *</label>
+          <input id="enquiry-date" name="pickupDate" required type="date" />
         </div>
         <div>
-          <label htmlFor="enquiry-package">Package interest</label>
-          <select
-            defaultValue={defaultPackage}
-            id="enquiry-package"
-            name="packageInterest"
-          >
-            <option value="">Custom / Not decided</option>
-            {tourPackages.map((item) => (
-              <option value={item.name} key={item.slug}>{item.name}</option>
-            ))}
+          <label htmlFor="enquiry-time">Pickup time *</label>
+          <input id="enquiry-time" name="pickupTime" required type="time" />
+        </div>
+      </div>
+
+      <div className="form-row">
+        <div>
+          <label htmlFor="enquiry-booking-type">Booking type *</label>
+          <select defaultValue={defaultBookingType} id="enquiry-booking-type" name="bookingType" required>
+            <option value="" disabled>Select service</option>
+            {bookingTypes.map((type) => <option value={type} key={type}>{type}</option>)}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="enquiry-cab">Preferred cab</label>
+          <select defaultValue={defaultCab} id="enquiry-cab" name="cabType">
+            <option value="">Any suitable cab</option>
+            {cabFleet.map((cab) => <option value={cab.name} key={cab.slug}>{cab.name} - {cab.capacity}</option>)}
           </select>
         </div>
       </div>
 
       <div>
+        <label htmlFor="enquiry-passengers">Number of passengers *</label>
+        <input id="enquiry-passengers" max="20" min="1" name="passengers" placeholder="2" required type="number" />
+      </div>
+
+      <div>
         <label htmlFor="enquiry-message">Message / special requirement</label>
-        <textarea
-          id="enquiry-message"
-          maxLength={1000}
-          name="message"
-          placeholder="Pickup city, hotel preference, children travelling, meal requirements..."
-          rows={5}
-        />
+        <textarea id="enquiry-message" maxLength={1000} name="message" placeholder="Flight number, luggage details, child seat or other requirements..." rows={4} />
       </div>
 
       <button className="btn btn-dark" type="submit">
-        Send enquiry on WhatsApp <Icon name="whatsapp" size={18} />
+        Get Fare on WhatsApp <Icon name="whatsapp" size={18} />
       </button>
-      <small>
-        By submitting, you agree to be contacted regarding this travel enquiry.
-      </small>
+      <small>Final fare will be confirmed based on route, date and cab availability.</small>
     </form>
   );
 }

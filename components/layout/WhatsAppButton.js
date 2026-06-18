@@ -1,11 +1,11 @@
 import Icon from "@/components/ui/Icon";
-import { createPackageEnquiryUrl } from "@/lib/whatsapp";
+import { createCabEnquiryUrl } from "@/lib/whatsapp";
 
 export default function WhatsAppButton() {
   return (
     <a
       className="whatsapp"
-      href={createPackageEnquiryUrl()}
+      href={createCabEnquiryUrl()}
       target="_blank"
       rel="noreferrer"
       aria-label="Chat with Tarun Travel Hub on WhatsApp"

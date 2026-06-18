@@ -7,10 +7,10 @@ export default function GallerySection() {
       <div className="container">
         <div className="section-head gallery-head">
           <div>
-            <span className="eyebrow"><span />Travel diary</span>
-            <h2>Moments from the <em>road</em></h2>
+            <span className="eyebrow"><span />Journeys we serve</span>
+            <h2>Comfort on Every <em>Road</em></h2>
           </div>
-          <p>Real places, warm memories and a thousand reasons to take that trip.</p>
+          <p>Airport transfers, city rides and outstation journeys across South India.</p>
         </div>
         <div className="gallery-grid">
           {galleryItems.map((item) => (

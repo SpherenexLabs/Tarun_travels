@@ -9,39 +9,38 @@ export default function AboutSection({ extended = false }) {
         <div className="photo-stack">
           <Image
             src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000&q=85"
-            alt="Friends enjoying a scenic road trip"
+            alt="Comfortable cab journey on a scenic road"
             width={800}
             height={950}
             sizes="(max-width: 720px) 100vw, 50vw"
           />
           <div className="experience-badge">
-            <b>10</b><span>Years of<br />happy journeys</span>
+            <b>24/7</b><span>Cab booking<br />and support</span>
           </div>
         </div>
         <div className="section-copy">
           <span className="eyebrow"><span />About Tarun Travel Hub</span>
-          <h2>Travel made personal,<br /><em>simple and joyful.</em></h2>
+          <h2>Cab booking made<br /><em>simple and reliable.</em></h2>
           <p>
-            We are a Bengaluru-based travel team helping families, couples and
-            groups discover incredible destinations without the planning stress.
-            From your first call to the final drop, one dedicated expert stays
-            with you.
+            We provide airport taxi, local rental and outstation cab services
+            from Bengaluru. From booking confirmation to final drop, our team
+            focuses on punctual pickup, clean vehicles and clear communication.
           </p>
           {extended && (
             <p>
-              Our itineraries balance must-see places with breathing room. We
-              work with dependable drivers and carefully selected stays, while
-              keeping every quote clear and every journey flexible.
+              Our fleet includes hatchbacks, sedans, SUVs, Innova vehicles and
+              Tempo Travellers. We work with experienced drivers and confirm
+              route-based fares before the journey whenever possible.
             </p>
           )}
           <div className="feature-list">
             <div>
               <Icon name="shield" />
-              <span><b>Trusted and transparent</b><small>No hidden costs. Just clear plans and dependable service.</small></span>
+              <span><b>Clear fare details</b><small>Route, vehicle and applicable extra charges are explained before booking.</small></span>
             </div>
             <div>
               <Icon name="map" />
-              <span><b>Local travel expertise</b><small>Routes, stays and experiences selected by people who know them.</small></span>
+              <span><b>Experienced drivers</b><small>Professional drivers familiar with Bengaluru, airport and outstation routes.</small></span>
             </div>
           </div>
           {!extended && (

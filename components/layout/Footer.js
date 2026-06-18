@@ -3,11 +3,21 @@ import { navigation, siteConfig } from "@/data/site";
 import Brand from "@/components/ui/Brand";
 import Icon from "@/components/ui/Icon";
 
-const destinations = ["Coorg", "Ooty", "Mysore", "Goa", "Kerala"];
+const routes = ["Airport Taxi", "Local Rental", "Bengaluru to Mysuru", "Bengaluru to Coorg", "Bengaluru to Ooty"];
 
 export default function Footer() {
   return (
     <footer>
+      <div className="footer-call-strip">
+        <div className="container">
+          <div>
+            <Icon name="phone" size={30} />
+            <span><small>Call us for instant booking</small><b>{siteConfig.phoneDisplay}</b></span>
+          </div>
+          <p>Available 24 hours for airport taxi, local rental and outstation cab booking.</p>
+          <a className="btn btn-primary" href={`tel:+${siteConfig.phone}`}>Call Now</a>
+        </div>
+      </div>
       <div className="container footer-grid">
         <div>
           <Brand className="footer-brand" />
@@ -40,9 +50,9 @@ export default function Footer() {
           ))}
         </div>
         <div>
-          <h4>Top destinations</h4>
-          {destinations.map((destination) => (
-            <Link href="/tour-packages" key={destination}>{destination}</Link>
+          <h4>Popular Services</h4>
+          {routes.map((route) => (
+            <Link href="/cabs" key={route}>{route}</Link>
           ))}
         </div>
         <div>
@@ -82,7 +92,7 @@ export default function Footer() {
       </div>
       <div className="container footer-bottom">
         <span>&copy; 2026 {siteConfig.name}. All rights reserved.</span>
-        <span>Made for journeys worth remembering.</span>
+        <span>Reliable cabs, clear fares and 24/7 support.</span>
       </div>
     </footer>
   );

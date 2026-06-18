@@ -1,0 +1,127 @@
+export const cabFleet = [
+  {
+    slug: "hatchback",
+    name: "Hatchback",
+    model: "WagonR / Indica or similar",
+    capacity: "3+1 passengers",
+    icon: "car",
+    tag: "Budget",
+    airportFare: "INR 799",
+    airportLimit: "35 km included",
+    localFare: "INR 1,300",
+    localLimit: "4 hours / 40 km",
+    outstationFare: "INR 11/km",
+    driverAllowance: "INR 300/day",
+    description:
+      "An affordable, comfortable choice for solo travellers, couples and light luggage.",
+    features: ["Air conditioned", "Verified driver", "Doorstep pickup", "24/7 booking"],
+  },
+  {
+    slug: "sedan",
+    name: "Sedan",
+    model: "Dzire / Etios or similar",
+    capacity: "4+1 passengers",
+    icon: "car",
+    tag: "Popular",
+    airportFare: "INR 899",
+    airportLimit: "35 km included",
+    localFare: "INR 2,100",
+    localLimit: "8 hours / 80 km",
+    outstationFare: "INR 12/km",
+    driverAllowance: "INR 300/day",
+    description:
+      "Comfortable seating and boot space for airport transfers, city travel and outstation rides.",
+    features: ["Air conditioned", "Large boot space", "Professional driver", "Clean interiors"],
+  },
+  {
+    slug: "ertiga",
+    name: "SUV Ertiga",
+    model: "Maruti Ertiga or similar",
+    capacity: "6+1 passengers",
+    icon: "car",
+    tag: "Family",
+    airportFare: "INR 1,499",
+    airportLimit: "35 km included",
+    localFare: "INR 2,700",
+    localLimit: "8 hours / 80 km",
+    outstationFare: "INR 15/km",
+    driverAllowance: "INR 400/day",
+    description:
+      "A practical family SUV with flexible seating for city, airport and outstation journeys.",
+    features: ["Air conditioned", "Family friendly", "Extra luggage space", "Experienced driver"],
+  },
+  {
+    slug: "innova",
+    name: "Toyota Innova",
+    model: "Innova or similar",
+    capacity: "7+1 passengers",
+    icon: "car",
+    tag: "Comfort",
+    airportFare: "INR 1,799",
+    airportLimit: "35 km included",
+    localFare: "INR 3,200",
+    localLimit: "8 hours / 80 km",
+    outstationFare: "INR 17/km",
+    driverAllowance: "INR 400/day",
+    description:
+      "Spacious and dependable for families, business groups and long-distance travel.",
+    features: ["Air conditioned", "Spacious seating", "Long-trip comfort", "Ample luggage room"],
+  },
+  {
+    slug: "innova-crysta",
+    name: "Innova Crysta",
+    model: "Toyota Innova Crysta",
+    capacity: "7+1 passengers",
+    icon: "car",
+    tag: "Premium",
+    airportFare: "INR 1,999",
+    airportLimit: "35 km included",
+    localFare: "INR 3,500",
+    localLimit: "8 hours / 80 km",
+    outstationFare: "INR 19/km",
+    driverAllowance: "INR 500/day",
+    description:
+      "Premium comfort, generous cabin space and a smooth ride for important journeys.",
+    features: ["Premium interiors", "Air conditioned", "Captain-seat comfort", "Professional chauffeur"],
+  },
+  {
+    slug: "tempo-traveller",
+    name: "Tempo Traveller",
+    model: "12-seater traveller",
+    capacity: "12+1 passengers",
+    icon: "car",
+    tag: "Groups",
+    airportFare: "INR 5,000",
+    airportLimit: "35 km included",
+    localFare: "INR 5,000",
+    localLimit: "8 hours / 80 km",
+    outstationFare: "INR 23/km",
+    driverAllowance: "INR 600/day",
+    description:
+      "A comfortable group travel option for corporate journeys, family functions and events.",
+    features: ["Air conditioned", "Push-back seats", "Group luggage space", "Experienced driver"],
+  },
+];
+
+export const popularRoutes = [
+  { from: "Bengaluru", to: "Mysuru", fare: "INR 1,999", distance: "145 km" },
+  { from: "Bengaluru", to: "Coorg", fare: "INR 3,999", distance: "265 km" },
+  { from: "Bengaluru", to: "Ooty", fare: "INR 4,499", distance: "270 km" },
+  { from: "Bengaluru", to: "Chennai", fare: "INR 4,999", distance: "345 km" },
+  { from: "Bengaluru", to: "Tirupati", fare: "INR 4,799", distance: "250 km" },
+  { from: "Bengaluru", to: "Pondicherry", fare: "INR 5,499", distance: "310 km" },
+];
+
+export const bookingTypes = [
+  "Airport Pickup",
+  "Airport Drop",
+  "Local Rental - 4 Hours / 40 km",
+  "Local Rental - 8 Hours / 80 km",
+  "Outstation One Way",
+  "Outstation Round Trip",
+  "Corporate Cab",
+];
+
+export function getCabBySlug(slug) {
+  return cabFleet.find((cab) => cab.slug === slug);
+}

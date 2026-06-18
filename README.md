@@ -30,11 +30,11 @@ GOOGLE_SITE_VERIFICATION=your-google-verification-code
 
 ```text
 app/                       Route pages, metadata and global styles
-  tour-packages/[slug]/    Static package detail pages
+  cabs/[slug]/             Static cab and fare detail pages
 components/
+  cabs/                    Fleet cards and grids
   forms/                   Interactive enquiry forms
   layout/                  Header, footer and global WhatsApp button
-  packages/                Package cards and grids
   sections/                Reusable page sections
   ui/                      Small shared presentation components
 data/                      Client-editable business and website content
@@ -45,21 +45,21 @@ public/                    Local static assets
 ## Content Management
 
 - Business phone, email, address and social links: `data/site.js`
-- Tour packages and pricing: `data/packages.js`
+- Cab fleet, fares and popular routes: `data/cabs.js`
 - Services, reviews and gallery content: `data/content.js`
 - Global design styles: `app/globals.css`
 
-Package pages are generated from each package `slug`, for example:
+Cab pages are generated from each vehicle `slug`, for example:
 
 ```text
-/tour-packages/coorg-coffee-trails
+/cabs/innova-crysta
 ```
 
 ## Deployment Checklist
 
 1. Replace placeholder contact details and social URLs in `data/site.js`.
 2. Set `NEXT_PUBLIC_SITE_URL` to the final domain.
-3. Confirm package prices and inclusions with the client.
+3. Confirm airport, local and outstation fares with the client.
 4. Replace placeholder Google Maps location if required.
 5. Keep the business name, address, phone, category and opening hours in
    `data/site.js` identical to the Google Business Profile.
@@ -91,7 +91,7 @@ After deployment:
 2. Verify the domain in Google Search Console using
    `GOOGLE_SITE_VERIFICATION`.
 3. Submit `https://your-domain.com/sitemap.xml` in Search Console.
-4. Request indexing for the home page and important package pages.
+4. Request indexing for the home page and important cab pages.
 5. Confirm `https://your-domain.com/robots.txt` is publicly accessible.
 
 Canonical URLs, page metadata, Open Graph tags, Twitter cards, robots

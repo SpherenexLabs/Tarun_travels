@@ -3,18 +3,19 @@ import EnquiryForm from "@/components/forms/EnquiryForm";
 import Icon from "@/components/ui/Icon";
 
 export default function ContactSection({
-  defaultDestination = "",
-  defaultPackage = "",
+  defaultDrop = "",
+  defaultCab = "",
+  defaultBookingType = "",
 }) {
   return (
-    <section className="contact section">
+    <section className="contact section" id="booking">
       <div className="container contact-grid">
         <div>
-          <span className="eyebrow"><span />Start planning</span>
-          <h2>Where would you like<br />to go <em>next?</em></h2>
+          <span className="eyebrow"><span />Quick cab booking</span>
+          <h2>Where Do You Need<br />a <em>Cab?</em></h2>
           <p>
-            Share a few details and our travel expert will call you with a
-            personalised itinerary and quote.
+            Share your pickup, destination and preferred vehicle. Our team will
+            confirm availability and fare.
           </p>
           <div className="contact-points">
             <a href={`tel:+${siteConfig.phone}`}>
@@ -62,8 +63,9 @@ export default function ContactSection({
           </div>
         </div>
         <EnquiryForm
-          defaultDestination={defaultDestination}
-          defaultPackage={defaultPackage}
+          defaultDrop={defaultDrop}
+          defaultCab={defaultCab}
+          defaultBookingType={defaultBookingType}
         />
       </div>
     </section>

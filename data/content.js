@@ -6,22 +6,22 @@ export const services = [
       "Clean, comfortable cars with experienced drivers for every journey.",
   },
   {
-    icon: "map",
-    title: "Custom Tour Plans",
+    icon: "plane",
+    title: "Airport Taxi",
     description:
-      "Flexible itineraries designed around your time, budget and interests.",
+      "On-time airport pickup and drop service available throughout the day.",
+  },
+  {
+    icon: "clock",
+    title: "Local Cab Packages",
+    description:
+      "Flexible 4-hour and 8-hour city rental packages for work and personal travel.",
   },
   {
     icon: "building",
-    title: "Hotel Booking",
+    title: "Corporate Cabs",
     description:
-      "Handpicked stays for couples, families and groups at honest prices.",
-  },
-  {
-    icon: "plane",
-    title: "Airport Transfers",
-    description:
-      "Reliable, on-time pickups and drops, available around the clock.",
+      "Dependable employee transport and business travel with professional drivers.",
   },
 ];
 
@@ -29,16 +29,16 @@ export const reviews = [
   {
     initials: "AK",
     name: "Arun Kumar",
-    trip: "Family trip to Coorg",
+    trip: "Bengaluru to Coorg cab",
     quote:
-      "Our Coorg trip was planned perfectly. The cab was spotless, the driver was kind and every stop felt well thought out. We could simply enjoy the holiday.",
+      "The cab was spotless, the driver arrived on time and the entire outstation journey was comfortable. The fare was explained clearly before pickup.",
   },
   {
     initials: "SP",
     name: "Sneha Patil",
-    trip: "Couple trip to Kerala",
+    trip: "Airport pickup",
     quote:
-      "Tarun adjusted our itinerary even at the last minute and stayed available throughout. Honest pricing and really warm service. Highly recommended.",
+      "Our late-night airport pickup was smooth and professional. The driver tracked our flight and was ready when we landed.",
   },
 ];
 
@@ -46,27 +46,27 @@ export const galleryItems = [
   {
     image:
       "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1000&q=85",
-    alt: "Mountain lake surrounded by green hills",
-    caption: "Find your calm",
+    alt: "Outstation cab route through green hills",
+    caption: "Outstation Rides",
     className: "gallery-tall",
   },
   {
     image:
       "https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=1000&q=85",
-    alt: "Travellers on a road trip",
-    caption: "Chase the horizon",
+    alt: "Passengers travelling by cab on a road trip",
+    caption: "Comfortable Travel",
   },
   {
     image:
       "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1000&q=85",
-    alt: "Historic Indian architecture",
-    caption: "Meet history",
+    alt: "Cab destination near historic Indian architecture",
+    caption: "Popular Destinations",
   },
   {
     image:
       "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=85",
-    alt: "Scenic open road",
-    caption: "Take the scenic route",
+    alt: "Open highway used for outstation cab service",
+    caption: "Reliable Highway Cabs",
     className: "gallery-wide",
   },
 ];

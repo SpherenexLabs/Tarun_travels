@@ -1,32 +1,33 @@
 import PageHero from "@/components/ui/PageHero";
 import ContactSection from "@/components/sections/ContactSection";
 import MapSection from "@/components/sections/MapSection";
-import { getPackageBySlug } from "@/data/packages";
+import { getCabBySlug } from "@/data/cabs";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
   title: "Contact Us",
   description:
-    "Contact Tarun Travel Hub for custom tour plans, cabs, hotel bookings and WhatsApp travel enquiries.",
+    "Contact Tarun Travel Hub to book airport taxi, local rental, outstation and corporate cabs in Bengaluru.",
   path: "/contact",
-  keywords: ["travel enquiry Bengaluru", "book tour package", "travel agent contact"],
+  keywords: ["cab booking contact Bengaluru", "book taxi Bangalore", "cab enquiry"],
 });
 
 export default async function ContactPage({ searchParams }) {
-  const { package: packageSlug } = await searchParams;
-  const packageItem = getPackageBySlug(packageSlug);
+  const { cab: cabSlug, drop, service } = await searchParams;
+  const cab = getCabBySlug(cabSlug);
 
   return (
     <>
       <PageHero
         eyebrow="Contact us"
-        title="Your next trip starts"
-        accent="right here."
-        description="Tell us what you have in mind and receive a clear, personalised travel plan."
+        title="Book your cab"
+        accent="right now."
+        description="Send your pickup and drop details for quick vehicle and fare confirmation."
       />
       <ContactSection
-        defaultDestination={packageItem?.destination}
-        defaultPackage={packageItem?.name}
+        defaultDrop={drop}
+        defaultCab={cab?.name}
+        defaultBookingType={service}
       />
       <MapSection />
     </>

@@ -2,10 +2,10 @@ export const siteConfig = {
   name: "Tarun Travel Hub",
   shortName: "Tarun",
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
-  tagline: "Explore more. Worry less.",
+  tagline: "Reliable cabs. Clear fares. 24/7 support.",
   description:
-    "Curated holidays, dependable cabs and travel memories made with care.",
-  category: "Travel Agency",
+    "Reliable airport taxi, local rental and outstation cab services in Bengaluru.",
+  category: "Taxi Service",
   phoneDisplay: "+91 98765 43210",
   phone: "919876543210",
   email: "hello@taruntravelhub.com",
@@ -48,11 +48,22 @@ export const siteConfig = {
 };
 
 export const navigation = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Packages", href: "/tour-packages" },
-  { label: "Services", href: "/services" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Reviews", href: "/#reviews" },
-  { label: "Contact", href: "/contact" },
+  { label: "Home", href: "/", icon: "home" },
+  { label: "Booking", href: "/contact#booking", icon: "bookmark" },
+  { label: "SUV Cabs", href: "/suv-cabs", icon: "car" },
+  {
+    label: "Airport",
+    href: "/airport-cabs",
+    icon: "car",
+  },
+  {
+    label: "Outstation",
+    href: "/outstation-cabs",
+    icon: "car",
+  },
+  {
+    label: "Local",
+    href: "/local-cabs",
+    icon: "car",
+  },
 ];

@@ -5,15 +5,15 @@ import MapSection from "@/components/sections/MapSection";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "Travel Services",
+  title: "Cab Services in Bengaluru",
   description:
-    "Private outstation cabs, custom itineraries, hotel bookings and airport transfers from Tarun Travel Hub.",
+    "Airport taxi, local rental, outstation and corporate cab services in Bengaluru with professional drivers.",
   path: "/services",
   keywords: [
     "outstation cabs Bengaluru",
-    "hotel booking service",
     "airport transfer Bengaluru",
-    "custom tour planning",
+    "local taxi Bengaluru",
+    "corporate cab service",
   ],
 });
 
@@ -21,10 +21,10 @@ export default function ServicesPage() {
   return (
     <>
       <PageHero
-        eyebrow="Travel services"
-        title="Every detail,"
-        accent="handled."
-        description="Dependable transport, comfortable stays and thoughtful planning in one place."
+        eyebrow="Cab services"
+        title="A cab for every"
+        accent="travel need."
+        description="Airport, local, outstation and corporate vehicles available around the clock."
       />
       <ServicesSection />
       <ContactSection />

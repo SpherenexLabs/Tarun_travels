@@ -9,10 +9,9 @@ export default function ServicesSection() {
       <div className="container">
         <SectionHeading
           centered
-          eyebrow="Everything under one roof"
-          title="We take care of the"
-          accent="journey"
-          description="From the first mile to the last memory, our team handles the details."
+          eyebrow="Our travel services"
+          title="Complete Cab Services"
+          description="One dependable team for airport, local, outstation and corporate cab requirements."
         />
         <div className="service-grid">
           {services.map((service, index) => (
@@ -21,7 +20,7 @@ export default function ServicesSection() {
               <div className="service-icon"><Icon name={service.icon} size={30} /></div>
               <h3>{service.title}</h3>
               <p>{service.description}</p>
-              <Link href="/contact">Enquire now <Icon name="arrow" size={15} /></Link>
+              <Link href="/contact">Book Now <Icon name="arrow" size={15} /></Link>
             </article>
           ))}
         </div>
