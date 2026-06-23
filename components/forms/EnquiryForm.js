@@ -128,7 +128,7 @@ export default function EnquiryForm({
           <label htmlFor="enquiry-cab">Preferred cab</label>
           <select defaultValue={defaultCab} id="enquiry-cab" name="cabType">
             <option value="">Any suitable cab</option>
-            {cabFleet.map((cab) => <option value={cab.name} key={cab.slug}>{cab.name} - {cab.capacity}</option>)}
+            {cabFleet.map((cab) => <option value={cab.name} key={cab.id || cab.slug}>{cab.name} - {cab.capacity}</option>)}
           </select>
         </div>
       </div>

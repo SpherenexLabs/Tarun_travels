@@ -52,6 +52,7 @@ export default function HomeHero({ slides: propSlides, phone, phoneDisplay }) {
   const [activeSlide, setActiveSlide] = useState(0);
 
   useEffect(() => {
+    if (!db) return;
     const slidesRef = ref(db, "heroSlides");
     const unsubscribe = onValue(slidesRef, (snap) => {
       if (snap.exists()) {
@@ -134,7 +135,7 @@ export default function HomeHero({ slides: propSlides, phone, phoneDisplay }) {
         className="hero-dots"
         aria-label={`Banner ${activeSlide + 1} of ${slides.length}`}
       >
-        {slides.map((item, index) => (
+        {slides.map((_, index) => (
           <span
             className={index === activeSlide ? "active" : ""}
             aria-hidden="true"
