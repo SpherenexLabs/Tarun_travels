@@ -16,7 +16,7 @@ export const metadata = createPageMetadata({
     "round trip cab Bengaluru",
     "one way taxi from Bangalore",
   ],
-  image: "/travel-hero.png",
+  image: "/cab-outstation-hero-ai.png",
 });
 
 export default function OutstationCabsPage() {
@@ -27,6 +27,7 @@ export default function OutstationCabsPage() {
         title="Comfortable road trips"
         accent="beyond the city."
         description="Book one-way or round-trip cabs with transparent per-kilometre fares and experienced drivers."
+        image="/cab-outstation-hero-ai.png"
       />
       <FareSection type="outstation" />
       <RoutesSection />

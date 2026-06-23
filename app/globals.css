@@ -50,7 +50,7 @@ em { color: var(--red); font-style: normal; }
 .nav-cta:hover { background: var(--red-dark); }
 .menu-btn { display: none; color: var(--red); background: none; border: 0; padding: 8px; }
 
-.hero { position: relative; min-height: 445px; color: white; background: url("/cab-booking-hero.png") center/cover no-repeat; padding: 62px 0; display: flex; align-items: center; border-bottom: 6px solid var(--yellow); }
+.hero { position: relative; min-height: 445px; color: white; background: url("/cab-airport-hero-ai.png") center/cover no-repeat; padding: 62px 0; display: flex; align-items: center; border-bottom: 6px solid var(--yellow); }
 .hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(12,19,30,.94) 0%, rgba(12,19,30,.72) 46%, rgba(12,19,30,.04) 72%); }
 .hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr; align-items: center; }
 .hero-content { padding: 8px 0; max-width: 700px; }
@@ -92,7 +92,7 @@ em { color: var(--red); font-style: normal; }
 .eyebrow { color: var(--red); display: flex; align-items: center; gap: 9px; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 12px; }
 .eyebrow > span { width: 27px; height: 3px; background: var(--yellow); }
 .eyebrow.light { color: var(--yellow); }
-.page-hero { min-height: 325px; position: relative; color: white; background: url("/travel-hero.png") center 56%/cover no-repeat; display: flex; align-items: center; }
+.page-hero { min-height: 325px; position: relative; color: white; background: url("/cab-airport-hero-ai.png") center 56%/cover no-repeat; display: flex; align-items: center; }
 .page-hero-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(17,24,39,.96), rgba(17,24,39,.55)); border-bottom: 6px solid var(--yellow); }
 .page-hero-content { position: relative; z-index: 2; padding: 55px 0; }
 .page-hero h1 { color: white; font-size: clamp(38px, 5vw, 59px); line-height: 1.08; text-transform: uppercase; margin: 0; }
@@ -316,7 +316,17 @@ footer { background: #11151c; color: white; }
 .booking-card p { color: var(--muted); font-size: 12px; line-height: 1.7; }
 .booking-card .btn { width: 100%; margin-top: 8px; }
 .booking-card .btn-outline { color: var(--ink); }
-.cab-detail-hero { background: linear-gradient(120deg, var(--navy), #2a3444); color: white; border-bottom: 6px solid var(--yellow); padding: 70px 0; }
+.cab-detail-hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(10,17,13,.94), rgba(10,17,13,.58) 52%, rgba(10,17,13,.12)),
+    url("/cab-airport-hero-ai.png") center/cover no-repeat;
+  color: white;
+  border-bottom: 6px solid var(--yellow);
+  padding: 70px 0;
+}
+.cab-detail-heading { position: relative; z-index: 1; }
 .cab-detail-heading { display: flex; align-items: center; gap: 45px; }
 .cab-detail-icon { width: 220px; height: 180px; background: white; color: var(--red); display: grid; place-items: center; border-bottom: 7px solid var(--yellow); }
 .cab-detail-heading h1 { color: white; font-size: clamp(38px, 5vw, 60px); text-transform: uppercase; margin: 0 0 15px; }
@@ -476,7 +486,7 @@ em { color: var(--yellow); font-style: italic; }
 .hero {
   min-height: 760px;
   padding: 155px 0 95px;
-  background-image: url("/cab-booking-hero.png");
+  background-image: url("/cab-airport-hero-ai.png");
   border: 0;
 }
 .hero-overlay {
@@ -520,7 +530,7 @@ em { color: var(--yellow); font-style: italic; }
   min-height: 500px;
   padding-top: 120px;
   align-items: flex-end;
-  background-image: url("/cab-booking-hero.png");
+  background-image: url("/cab-airport-hero-ai.png");
 }
 .page-hero-overlay {
   border: 0;
@@ -646,9 +656,92 @@ footer { background: #10130f; }
 .footer-brand > span:last-child b { color: white; }
 .footer-grid h4 { font: 17px Georgia, serif; text-transform: none; }
 
+.footer-touch {
+  display: grid;
+  grid-template-columns: .95fr 1.05fr;
+  gap: 60px;
+  padding: 34px 0 28px;
+  border-top: 3px solid rgba(255,255,255,.35);
+  border-bottom: 3px solid rgba(255,255,255,.35);
+}
+.footer-touch-copy {
+  text-align: center;
+}
+.footer-touch h3 {
+  margin: 0 0 18px;
+  color: white;
+  font: 700 28px/1.1 Georgia, "Times New Roman", serif;
+  letter-spacing: 0;
+}
+.footer-touch h4 {
+  margin: 14px 0 4px;
+  color: var(--yellow);
+  font: 700 18px/1.2 Georgia, "Times New Roman", serif;
+}
+.footer-touch p {
+  margin: 0;
+  color: white;
+  font: 400 14px/1.7 Georgia, "Times New Roman", serif;
+}
+.footer-touch-side {
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  gap: 48px;
+  padding-top: 4px;
+}
+.footer-touch-brand {
+  transform: scale(1.35);
+  transform-origin: top center;
+}
+.footer-touch-brand .brand-mark {
+  box-shadow: none;
+}
+.footer-touch-brand > span:last-child b {
+  color: white;
+}
+.footer-touch-socials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(28px, 4vw, 70px);
+  width: 100%;
+}
+.footer-touch-socials a {
+  color: white;
+}
+.footer-touch-socials a:hover {
+  color: var(--yellow);
+}
+.footer-touch-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  color: white;
+  font: 700 14px/1.2 Georgia, "Times New Roman", serif;
+}
+.footer-touch-nav span {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+}
+.footer-touch-nav a:hover {
+  color: var(--yellow);
+}
+.footer-touch-nav b {
+  color: white;
+}
+.footer-touch-rights {
+  margin-top: 6px !important;
+  font-size: 13px !important;
+}
+
 .cab-detail-hero {
   padding-top: 145px;
-  background: linear-gradient(120deg, #163f30, #102b21);
+  background:
+    linear-gradient(90deg, rgba(10,17,13,.94), rgba(10,17,13,.58) 52%, rgba(10,17,13,.12)),
+    url("/cab-airport-hero-ai.png") center/cover no-repeat;
   border: 0;
 }
 .cab-detail-icon { border-bottom: 6px solid var(--yellow); }
@@ -704,7 +797,7 @@ footer { background: #10130f; }
 .nav-header .header-nav {
   width: min(1400px, calc(100% - 44px));
   height: 92px;
-  gap: 34px;
+  gap: 24px;
 }
 .header-brand {
   min-width: 228px;
@@ -752,6 +845,7 @@ footer { background: #10130f; }
   color: white;
 }
 .header-nav .nav-links a svg {
+  display: none;
   flex: 0 0 auto;
   color: var(--yellow);
   transition: transform .2s ease;
@@ -819,7 +913,7 @@ footer { background: #10130f; }
   border-radius: 3px;
 }
 
-@media (max-width: 1240px) {
+@media (max-width: 1100px) {
   .nav-header .header-nav { height: 80px; }
   .header-nav .nav-links {
     position: absolute;
@@ -844,6 +938,7 @@ footer { background: #10130f; }
     border-color: rgba(255,255,255,.1);
   }
   .header-nav .nav-links a:after { display: none; }
+  .header-nav .nav-links a svg { display: initial; }
   .header-actions { margin-left: auto; }
   .nav-header .menu-btn { display: block; }
 }
@@ -1154,4 +1249,99 @@ footer { background: #10130f; }
   .fare-grid { grid-template-columns: 1fr; }
   .fare-card .fare-car-image { height: 138px; }
   .fare-card .fare-car-image img { height: 132px; }
+}
+
+/* Footer SEO route list */
+.footer-seo {
+  padding: 34px 0 42px;
+  border-top: 3px solid rgba(255,255,255,.35);
+}
+.footer-seo h4 {
+  margin: 0 0 32px;
+  color: white;
+  text-align: center;
+  font: 700 26px/1.25 Georgia, "Times New Roman", serif;
+}
+.footer-seo h4 em {
+  color: var(--yellow);
+  font-style: normal;
+}
+.footer-trip-columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 54px;
+}
+.footer-trip-columns > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 14px;
+}
+.footer-trip-columns a {
+  color: white;
+  font: 700 22px/1.35 Georgia, "Times New Roman", serif;
+}
+.footer-trip-columns a:hover {
+  color: var(--yellow);
+}
+
+@media (max-width: 1020px) {
+  .footer-touch {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .footer-touch h3 {
+    font-size: 24px;
+  }
+  .footer-touch p {
+    font-size: 13px;
+  }
+  .footer-touch-side {
+    gap: 34px;
+  }
+  .footer-trip-columns {
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+  }
+}
+
+@media (max-width: 740px) {
+  .footer-touch {
+    padding: 28px 0;
+  }
+  .footer-touch h3 {
+    font-size: 22px;
+  }
+  .footer-touch h4 {
+    font-size: 16px;
+  }
+  .footer-touch p {
+    font-size: 13px;
+  }
+  .footer-touch-brand {
+    transform: none;
+  }
+  .footer-touch-socials {
+    gap: 28px;
+  }
+  .footer-touch-nav {
+    gap: 8px;
+    font-size: 13px;
+  }
+  .footer-touch-nav span {
+    gap: 8px;
+  }
+  .footer-touch-rights {
+    font-size: 12px !important;
+  }
+  .footer-seo h4 {
+    font-size: 22px;
+    text-align: left;
+  }
+  .footer-trip-columns {
+    grid-template-columns: 1fr;
+  }
+  .footer-trip-columns a {
+    font-size: 18px;
+  }
 }

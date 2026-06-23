@@ -3,16 +3,26 @@ import { notFound } from "next/navigation";
 import ContactSection from "@/components/sections/ContactSection";
 import Icon from "@/components/ui/Icon";
 import { cabFleet, getCabBySlug } from "@/data/cabs";
+import { getCabs } from "@/lib/db";
 import { createCabEnquiryUrl } from "@/lib/whatsapp";
 import { createPageMetadata } from "@/lib/seo";
+import Image from "next/image";
 
 export function generateStaticParams() {
   return cabFleet.map((cab) => ({ slug: cab.slug }));
 }
 
+async function getCabData(slug) {
+  const firebaseCabs = await getCabs();
+  if (firebaseCabs && firebaseCabs.length > 0) {
+    return firebaseCabs.find((c) => c.slug === slug) || null;
+  }
+  return getCabBySlug(slug) || null;
+}
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const cab = getCabBySlug(slug);
+  const cab = await getCabData(slug);
   if (!cab) return {};
 
   return createPageMetadata({
@@ -29,7 +39,7 @@ export async function generateMetadata({ params }) {
 
 export default async function CabDetailsPage({ params }) {
   const { slug } = await params;
-  const cab = getCabBySlug(slug);
+  const cab = await getCabData(slug);
   if (!cab) notFound();
 
   const structuredData = {
@@ -43,8 +53,8 @@ export default async function CabDetailsPage({ params }) {
       name: "Tarun Travel Hub",
     },
     offers: [
-      { "@type": "Offer", name: "Airport taxi", priceCurrency: "INR", price: cab.airportFare.replace(/\D/g, "") },
-      { "@type": "Offer", name: "Local rental", priceCurrency: "INR", price: cab.localFare.replace(/\D/g, "") },
+      { "@type": "Offer", name: "Airport taxi", priceCurrency: "INR", price: cab.airportFare?.replace(/\D/g, "") },
+      { "@type": "Offer", name: "Local rental", priceCurrency: "INR", price: cab.localFare?.replace(/\D/g, "") },
     ],
   };
 
@@ -53,7 +63,13 @@ export default async function CabDetailsPage({ params }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <section className="cab-detail-hero">
         <div className="container cab-detail-heading">
-          <div className="cab-detail-icon"><Icon name="car" size={115} /></div>
+          {cab.imageUrl ? (
+            <div className="cab-detail-icon" style={{ position: 'relative', width: 180, height: 110 }}>
+              <Image src={cab.imageUrl} alt={cab.name} fill style={{ objectFit: 'contain' }} />
+            </div>
+          ) : (
+            <div className="cab-detail-icon"><Icon name="car" size={115} /></div>
+          )}
           <div>
             <span className="eyebrow light"><span />{cab.model}</span>
             <h1>{cab.name} Cab Booking</h1>
@@ -78,7 +94,7 @@ export default async function CabDetailsPage({ params }) {
             <div className="detail-block">
               <h3>Vehicle features</h3>
               <ul>
-                {cab.features.map((feature) => (
+                {(Array.isArray(cab.features) ? cab.features : []).map((feature) => (
                   <li key={feature}><Icon name="check" size={18} />{feature}</li>
                 ))}
               </ul>
