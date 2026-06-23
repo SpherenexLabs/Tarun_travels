@@ -2,11 +2,11 @@ import PageHero from "@/components/ui/PageHero";
 import FareCard from "@/components/cabs/FareCard";
 import TrustSection from "@/components/sections/TrustSection";
 import ContactSection from "@/components/sections/ContactSection";
-import { cabFleet } from "@/data/cabs";
+import { cabFleet as staticCabFleet } from "@/data/cabs";
+import { getCabs } from "@/lib/db";
 import { createPageMetadata } from "@/lib/seo";
 
 const suvSlugs = ["ertiga", "innova", "innova-crysta"];
-const suvFleet = cabFleet.filter((cab) => suvSlugs.includes(cab.slug));
 
 export const metadata = createPageMetadata({
   title: "SUV Cabs in Bengaluru | Ertiga, Innova & Crysta",
@@ -20,10 +20,14 @@ export const metadata = createPageMetadata({
     "Innova Crysta cab booking",
     "7 seater cab Bangalore",
   ],
-  image: "/cab-fare-card.png",
+  image: "/cab-outstation-hero-ai.png",
 });
 
-export default function SuvCabsPage() {
+export default async function SuvCabsPage() {
+  const firebaseCabs = await getCabs();
+  const allCabs = firebaseCabs && firebaseCabs.length > 0 ? firebaseCabs : staticCabFleet;
+  const suvFleet = allCabs.filter((cab) => suvSlugs.includes(cab.slug));
+
   return (
     <>
       <PageHero
@@ -31,6 +35,7 @@ export default function SuvCabsPage() {
         title="More room for families"
         accent="and groups."
         description="Compare Ertiga, Innova and Innova Crysta fares for airport transfers, local rental and outstation journeys."
+        image="/cab-outstation-hero-ai.png"
       />
 
       <section className="fare-section fare-section-airport suv-fare-section">
@@ -46,7 +51,7 @@ export default function SuvCabsPage() {
                 cab={cab}
                 type="airport"
                 showAllFares
-                key={cab.slug}
+                key={cab.id || cab.slug || cab.name}
               />
             ))}
           </div>
