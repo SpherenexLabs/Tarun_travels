@@ -16,7 +16,7 @@ export const metadata = createPageMetadata({
     "hourly cab rental Bengaluru",
     "8 hour 80 km cab Bangalore",
   ],
-  image: "/local-city-cab-hero.png",
+  image: "/cab-local-hero-ai.png",
 });
 
 export default function LocalCabsPage() {
@@ -27,6 +27,7 @@ export default function LocalCabsPage() {
         title="Flexible city travel"
         accent="by the hour."
         description="Choose a local cab package for meetings, shopping, sightseeing, appointments and everyday city travel."
+        image="/cab-local-hero-ai.png"
       />
       <FareSection type="local" />
       <TrustSection />

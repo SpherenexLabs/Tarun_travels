@@ -20,7 +20,7 @@ export const metadata = {
     siteName: siteConfig.name,
     title: "Tarun Travel Hub | Cab Booking in Bengaluru",
     description: siteConfig.description,
-    images: ["/travel-hero.png"],
+    images: ["/cab-airport-hero-ai.png"],
   },
   robots: {
     index: true,

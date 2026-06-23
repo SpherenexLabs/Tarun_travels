@@ -6,6 +6,8 @@ import ReviewsSection from "@/components/sections/ReviewsSection";
 import ContactSection from "@/components/sections/ContactSection";
 import MapSection from "@/components/sections/MapSection";
 import { createPageMetadata } from "@/lib/seo";
+import { getHeroSlides, getSiteSettings } from "@/lib/db";
+import { siteConfig } from "@/data/site";
 
 export const metadata = createPageMetadata({
   title: "Cab Booking in Bengaluru | Airport, Local & Outstation",
@@ -20,10 +22,24 @@ export const metadata = createPageMetadata({
   ],
 });
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [heroSlides, siteSettings] = await Promise.all([
+    getHeroSlides(),
+    getSiteSettings(),
+  ]);
+
+  const phone =
+    siteSettings?.phoneRaw && siteSettings.phoneRaw !== "919876543210"
+      ? siteSettings.phoneRaw
+      : siteConfig.phone;
+  const phoneDisplay =
+    siteSettings?.phone && siteSettings.phone !== "+91 98765 43210"
+      ? siteSettings.phone
+      : siteConfig.phoneDisplay;
+
   return (
     <>
-      <HomeHero />
+      <HomeHero slides={heroSlides} phone={phone} phoneDisplay={phoneDisplay} />
       <FareSection type="airport" />
       <FareSection type="outstation" />
       <FareSection type="local" />

@@ -16,7 +16,7 @@ export const metadata = createPageMetadata({
     "Kempegowda airport pickup",
     "Bengaluru airport drop cab",
   ],
-  image: "/cab-booking-hero.png",
+  image: "/cab-airport-hero-ai.png",
 });
 
 export default function AirportCabsPage() {
@@ -27,6 +27,7 @@ export default function AirportCabsPage() {
         title="On-time airport pickup"
         accent="and drop."
         description="Choose a clean AC cab for dependable 24/7 transfers to and from Kempegowda International Airport."
+        image="/cab-airport-hero-ai.png"
       />
       <FareSection type="airport" />
       <TrustSection />

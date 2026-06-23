@@ -16,6 +16,7 @@ export const metadata = createPageMetadata({
     "outstation cab Bangalore",
     "local cab package",
   ],
+  image: "/cab-airport-hero-ai.png",
 });
 
 export default function CabsPage() {
@@ -26,6 +27,7 @@ export default function CabsPage() {
         title="Choose the right cab"
         accent="for your journey."
         description="Airport pickup, local rental and outstation vehicles for individuals, families and groups."
+        image="/cab-airport-hero-ai.png"
       />
       <FareSection type="airport" />
       <FareSection type="outstation" />
