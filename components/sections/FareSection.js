@@ -1,4 +1,5 @@
-import { cabFleet } from "@/data/cabs";
+import { cabFleet as staticCabFleet } from "@/data/cabs";
+import { getCabs } from "@/lib/db";
 import FareCard from "@/components/cabs/FareCard";
 
 const sectionCopy = {
@@ -19,11 +20,15 @@ const sectionCopy = {
   },
 };
 
-export default function FareSection({ type }) {
+export default async function FareSection({ type }) {
   const copy = sectionCopy[type];
+
+  const firebaseCabs = await getCabs();
+  const allCabs = firebaseCabs && firebaseCabs.length > 0 ? firebaseCabs : staticCabFleet;
+
   const items = type === "outstation"
-    ? cabFleet.filter((cab) => cab.slug !== "hatchback")
-    : cabFleet;
+    ? allCabs.filter((cab) => cab.slug !== "hatchback")
+    : allCabs;
 
   return (
     <section className={`fare-section fare-section-${type}`}>
@@ -34,7 +39,7 @@ export default function FareSection({ type }) {
           <p>{copy.description}</p>
         </div>
         <div className="fare-grid">
-          {items.map((cab) => <FareCard cab={cab} type={type} key={`${type}-${cab.slug}`} />)}
+          {items.map((cab) => <FareCard cab={cab} type={type} key={cab.id || `${type}-${cab.slug || cab.name}`} />)}
         </div>
       </div>
     </section>

@@ -5,11 +5,13 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { siteConfig } from "@/data/site";
 import Icon from "@/components/ui/Icon";
+import { db } from "@/lib/firebaseClient";
+import { ref, onValue } from "firebase/database";
 
-const slides = [
+const STATIC_SLIDES = [
   {
-    image: "/cab-booking-hero.png",
-    alt: "White airport taxis waiting outside Bengaluru airport",
+    image: "/cab-airport-hero-ai.png",
+    alt: "Cab driver helping a traveler with luggage at a pickup point",
     kicker: "Bengaluru Airport Taxi - 24/7",
     title: "Reliable Airport",
     accent: "Pickup & Drop.",
@@ -18,8 +20,8 @@ const slides = [
     position: "center",
   },
   {
-    image: "/travel-hero.png",
-    alt: "White SUV cab travelling on a scenic outstation road",
+    image: "/cab-outstation-hero-ai.png",
+    alt: "Outstation cab driver helping travelers with luggage on a scenic route",
     kicker: "Comfortable Outstation Cabs",
     title: "Travel Farther",
     accent: "With Confidence.",
@@ -28,8 +30,8 @@ const slides = [
     position: "center",
   },
   {
-    image: "/local-city-cab-hero.png",
-    alt: "White local taxi driving on a Bengaluru city road",
+    image: "/cab-local-hero-ai.png",
+    alt: "Local cab driver opening the door for a passenger in the city",
     kicker: "Local Bengaluru Taxi",
     title: "Book Your Cab",
     accent: "At Best Price.",
@@ -39,14 +41,35 @@ const slides = [
   },
 ];
 
-export default function HomeHero() {
+export default function HomeHero({ slides: propSlides, phone, phoneDisplay }) {
+  const [slides, setSlides] = useState(
+    propSlides && propSlides.length > 0 ? propSlides : STATIC_SLIDES
+  );
+
+  const displayPhone = phoneDisplay || siteConfig.phoneDisplay;
+  const callPhone = phone || siteConfig.phone;
+
   const [activeSlide, setActiveSlide] = useState(0);
 
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+    const slidesRef = ref(db, "heroSlides");
+    const unsubscribe = onValue(slidesRef, (snap) => {
+      if (snap.exists()) {
+        const data = Object.entries(snap.val())
+          .map(([id, item]) => ({ id, ...item }))
+          .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+        setSlides(data.length > 0 ? data : STATIC_SLIDES);
+      } else {
+        setSlides(STATIC_SLIDES);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
     if (prefersReducedMotion) return undefined;
 
     const timer = window.setInterval(() => {
@@ -54,7 +77,7 @@ export default function HomeHero() {
     }, 4500);
 
     return () => window.clearInterval(timer);
-  }, []);
+  }, [slides.length]);
 
   const slide = slides[activeSlide];
 
@@ -69,33 +92,35 @@ export default function HomeHero() {
           <div
             className={`hero-slide${index === activeSlide ? " active" : ""}`}
             aria-hidden={index !== activeSlide}
-            key={item.image}
+            key={`${item.image}-${index}`}
           >
             <Image
-              src={item.image}
-              alt={item.alt}
+              src={item.imageUrl || item.image}
+              alt={item.alt || item.title || "Hero slide"}
               fill
               priority={index === 0}
               sizes="100vw"
-              style={{ objectPosition: item.position }}
+              style={{ objectPosition: item.position || "center" }}
             />
           </div>
         ))}
       </div>
       <div className="hero-overlay" />
       <div className="container hero-grid">
-        <div className="hero-content" key={slide.image}>
+        <div className="hero-content" key={activeSlide}>
           <span className="hero-kicker">{slide.kicker}</span>
-          <h1>{slide.title}<br /><em>{slide.accent}</em></h1>
-          <p>
-            {slide.description}
-          </p>
+          <h1>
+            {slide.title}
+            <br />
+            <em>{slide.accent}</em>
+          </h1>
+          <p>{slide.description}</p>
           <div className="hero-actions">
             <Link href="/cabs" className="btn btn-primary">
               Check Cab Fares <Icon name="arrow" size={18} />
             </Link>
-            <a href={`tel:+${siteConfig.phone}`} className="btn btn-ghost">
-              <Icon name="phone" size={18} /> Call {siteConfig.phoneDisplay}
+            <a href={`tel:+${callPhone}`} className="btn btn-ghost">
+              <Icon name="phone" size={18} /> Call {displayPhone}
             </a>
           </div>
           <div className="hero-trust">
@@ -105,12 +130,17 @@ export default function HomeHero() {
           </div>
         </div>
       </div>
-      <div className="hero-dots" aria-label={`Banner ${activeSlide + 1} of ${slides.length}`}>
+      <div
+        className="hero-dots"
+        aria-label={`Banner ${activeSlide + 1} of ${slides.length}`}
+      >
         {slides.map((item, index) => (
           <span
             className={index === activeSlide ? "active" : ""}
             aria-hidden="true"
-            key={item.image}
+            key={`dot-${index}`}
+            onClick={() => setActiveSlide(index)}
+            style={{ cursor: "pointer" }}
           />
         ))}
       </div>

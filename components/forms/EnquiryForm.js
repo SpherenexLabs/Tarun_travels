@@ -1,33 +1,72 @@
 "use client";
 
-import { bookingTypes, cabFleet } from "@/data/cabs";
+import { bookingTypes, cabFleet as staticCabFleet } from "@/data/cabs";
 import { createWhatsAppUrl } from "@/lib/whatsapp";
 import Icon from "@/components/ui/Icon";
+
+async function saveEnquiryToFirebase(data) {
+  try {
+    const databaseUrl = process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL;
+    if (!databaseUrl) return;
+
+    const { db } = await import("@/lib/firebaseClient");
+    const { ref, push } = await import("firebase/database");
+
+    await push(ref(db, "enquiries"), {
+      ...data,
+      status: "new",
+      createdAt: Date.now(),
+    });
+  } catch {
+    // Silent fail — WhatsApp submission is the primary flow
+  }
+}
 
 export default function EnquiryForm({
   defaultDrop = "",
   defaultCab = "",
   defaultBookingType = "",
+  cabs,
 }) {
-  function handleSubmit(event) {
+  const cabFleet = cabs && cabs.length > 0 ? cabs : staticCabFleet;
+  async function handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+
+    const formData = {
+      name: data.get("name"),
+      mobile: data.get("mobile"),
+      email: data.get("email") || "",
+      pickup: data.get("pickup"),
+      drop: data.get("drop"),
+      pickupDate: data.get("pickupDate"),
+      pickupTime: data.get("pickupTime"),
+      bookingType: data.get("bookingType"),
+      cabType: data.get("cabType") || "",
+      passengers: data.get("passengers"),
+      message: data.get("message") || "",
+    };
+
     const message = [
       "Hello Tarun Travel Hub, I would like to book a cab.",
       "",
-      `Customer name: ${data.get("name")}`,
-      `Mobile number: ${data.get("mobile")}`,
-      `Email ID: ${data.get("email") || "Not provided"}`,
-      `Pickup location: ${data.get("pickup")}`,
-      `Drop location: ${data.get("drop")}`,
-      `Pickup date: ${data.get("pickupDate")}`,
-      `Pickup time: ${data.get("pickupTime")}`,
-      `Booking type: ${data.get("bookingType")}`,
-      `Preferred cab: ${data.get("cabType") || "Any suitable cab"}`,
-      `Passengers: ${data.get("passengers")}`,
-      `Special requirement: ${data.get("message") || "None"}`,
+      `Customer name: ${formData.name}`,
+      `Mobile number: ${formData.mobile}`,
+      `Email ID: ${formData.email || "Not provided"}`,
+      `Pickup location: ${formData.pickup}`,
+      `Drop location: ${formData.drop}`,
+      `Pickup date: ${formData.pickupDate}`,
+      `Pickup time: ${formData.pickupTime}`,
+      `Booking type: ${formData.bookingType}`,
+      `Preferred cab: ${formData.cabType || "Any suitable cab"}`,
+      `Passengers: ${formData.passengers}`,
+      `Special requirement: ${formData.message || "None"}`,
     ].join("\n");
 
+    // Save to Firebase (non-blocking, shows in admin Enquiries panel)
+    saveEnquiryToFirebase(formData);
+
+    // Open WhatsApp as before
     window.open(createWhatsAppUrl(message), "_blank", "noopener,noreferrer");
   }
 

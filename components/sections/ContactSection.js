@@ -1,12 +1,20 @@
-import { siteConfig } from "@/data/site";
 import EnquiryForm from "@/components/forms/EnquiryForm";
 import Icon from "@/components/ui/Icon";
+import { getPublicSiteSettings } from "@/lib/publicSiteSettings";
+import { getCabs } from "@/lib/db";
+import { cabFleet as staticCabFleet } from "@/data/cabs";
 
-export default function ContactSection({
+export default async function ContactSection({
   defaultDrop = "",
   defaultCab = "",
   defaultBookingType = "",
 }) {
+  const [siteSettings, firebaseCabs] = await Promise.all([
+    getPublicSiteSettings(),
+    getCabs(),
+  ]);
+  const cabs = firebaseCabs && firebaseCabs.length > 0 ? firebaseCabs : staticCabFleet;
+
   return (
     <section className="contact section" id="booking">
       <div className="container contact-grid">
@@ -18,25 +26,25 @@ export default function ContactSection({
             confirm availability and fare.
           </p>
           <div className="contact-points">
-            <a href={`tel:+${siteConfig.phone}`}>
+            <a href={`tel:+${siteSettings.phone}`}>
               <span><Icon name="phone" /></span>
-              <div><small>Call us anytime</small><b>{siteConfig.phoneDisplay}</b></div>
+              <div><small>Call us anytime</small><b>{siteSettings.phoneDisplay}</b></div>
             </a>
-            <a href={`mailto:${siteConfig.email}`}>
+            <a href={`mailto:${siteSettings.email}`}>
               <span>@</span>
-              <div><small>Write to us</small><b>{siteConfig.email}</b></div>
+              <div><small>Write to us</small><b>{siteSettings.email}</b></div>
             </a>
             <a
-              href={siteConfig.mapDirectionsUrl}
+              href={siteSettings.mapDirectionsUrl}
               target="_blank"
               rel="noopener noreferrer"
             >
               <span><Icon name="map" /></span>
               <div><small>Find our location</small><b>Google Maps</b></div>
             </a>
-            {siteConfig.googleBusinessProfile && (
+            {siteSettings.googleBusinessProfile && (
               <a
-                href={siteConfig.googleBusinessProfile}
+                href={siteSettings.googleBusinessProfile}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -45,7 +53,7 @@ export default function ContactSection({
               </a>
             )}
             <a
-              href={siteConfig.instagram}
+              href={siteSettings.instagram}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -53,7 +61,7 @@ export default function ContactSection({
               <div><small>Follow our journeys</small><b>Instagram</b></div>
             </a>
             <a
-              href={siteConfig.facebook}
+              href={siteSettings.facebook}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -66,6 +74,7 @@ export default function ContactSection({
           defaultDrop={defaultDrop}
           defaultCab={defaultCab}
           defaultBookingType={defaultBookingType}
+          cabs={cabs}
         />
       </div>
     </section>

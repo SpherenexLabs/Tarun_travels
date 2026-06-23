@@ -33,7 +33,7 @@ export default function FareCard({ cab, type, showAllFares = false }) {
       <div className="fare-car-image">
         <span className="fare-tag">{cab.tag}</span>
         <Image
-          src="/cab-fare-card.png"
+          src={cab.imageUrl || "/cab-fare-card.png"}
           alt={`${cab.name} cab for booking`}
           width={320}
           height={180}

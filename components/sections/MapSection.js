@@ -1,39 +1,41 @@
-import { siteConfig } from "@/data/site";
 import Icon from "@/components/ui/Icon";
+import { getPublicSiteSettings } from "@/lib/publicSiteSettings";
 
-export default function MapSection() {
+export default async function MapSection() {
+  const siteSettings = await getPublicSiteSettings();
+
   return (
     <section className="map-section" aria-label="Office location">
       <iframe
-        title={`${siteConfig.name} location`}
-        src={siteConfig.mapEmbedUrl}
+        title={`${siteSettings.name} location`}
+        src={siteSettings.mapEmbedUrl}
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
       />
       <div className="map-card">
         <span className="eyebrow"><span />Visit us</span>
-        <h3>{siteConfig.name}</h3>
-        <p>{siteConfig.address.map((line) => <span key={line}>{line}<br /></span>)}</p>
+        <h3>{siteSettings.name}</h3>
+        <p>{siteSettings.address.map((line) => <span key={line}>{line}<br /></span>)}</p>
         <div className="map-actions">
           <a
-            href={siteConfig.mapDirectionsUrl}
+            href={siteSettings.mapDirectionsUrl}
             target="_blank"
             rel="noopener noreferrer"
           >
             Get directions <Icon name="arrow" size={16} />
           </a>
-          {siteConfig.googleBusinessProfile && (
+          {siteSettings.googleBusinessProfile && (
             <a
-              href={siteConfig.googleBusinessProfile}
+              href={siteSettings.googleBusinessProfile}
               target="_blank"
               rel="noopener noreferrer"
             >
               Google Business Profile <Icon name="arrow" size={16} />
             </a>
           )}
-          {siteConfig.googleReviewUrl && (
+          {siteSettings.googleReviewUrl && (
             <a
-              href={siteConfig.googleReviewUrl}
+              href={siteSettings.googleReviewUrl}
               target="_blank"
               rel="noopener noreferrer"
             >

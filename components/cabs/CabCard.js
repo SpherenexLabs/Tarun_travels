@@ -9,7 +9,7 @@ export default function CabCard({ cab }) {
       <div className="cab-visual">
         <span className="tag">{cab.tag}</span>
         <Image
-          src="/cab-fare-card.png"
+          src={cab.imageUrl || "/cab-fare-card.png"}
           alt={`${cab.name} cab`}
           width={420}
           height={240}

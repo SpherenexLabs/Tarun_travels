@@ -1,7 +1,15 @@
 import Image from "next/image";
-import { galleryItems } from "@/data/content";
+import { galleryItems as staticGallery } from "@/data/content";
+import { getGalleryItems } from "@/lib/db";
 
-export default function GallerySection() {
+export default async function GallerySection() {
+  const firebaseGallery = await getGalleryItems();
+
+  const galleryItems =
+    firebaseGallery && firebaseGallery.length > 0
+      ? firebaseGallery
+      : staticGallery;
+
   return (
     <section className="gallery section">
       <div className="container">
@@ -14,7 +22,7 @@ export default function GallerySection() {
         </div>
         <div className="gallery-grid">
           {galleryItems.map((item) => (
-            <figure className={item.className || ""} key={item.image}>
+            <figure className={item.className || item.class || ""} key={item.image}>
               <Image
                 src={item.image}
                 alt={item.alt}

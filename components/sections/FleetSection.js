@@ -1,10 +1,13 @@
 import Link from "next/link";
-import { cabFleet } from "@/data/cabs";
+import { cabFleet as staticCabFleet } from "@/data/cabs";
+import { getCabs } from "@/lib/db";
 import CabGrid from "@/components/cabs/CabGrid";
 import Icon from "@/components/ui/Icon";
 
-export default function FleetSection({ limit }) {
-  const items = limit ? cabFleet.slice(0, limit) : cabFleet;
+export default async function FleetSection({ limit }) {
+  const firebaseCabs = await getCabs();
+  const allCabs = firebaseCabs && firebaseCabs.length > 0 ? firebaseCabs : staticCabFleet;
+  const items = limit ? allCabs.slice(0, limit) : allCabs;
 
   return (
     <section className="packages section" id="fleet">

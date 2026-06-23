@@ -1,8 +1,16 @@
-import { popularRoutes } from "@/data/cabs";
+import { popularRoutes as staticRoutes } from "@/data/cabs";
+import { getRoutes } from "@/lib/db";
 import { createCabEnquiryUrl } from "@/lib/whatsapp";
 import Icon from "@/components/ui/Icon";
 
-export default function RoutesSection() {
+export default async function RoutesSection() {
+  const firebaseRoutes = await getRoutes();
+
+  const popularRoutes =
+    firebaseRoutes && firebaseRoutes.length > 0
+      ? firebaseRoutes
+      : staticRoutes;
+
   return (
     <section className="routes section">
       <div className="container">

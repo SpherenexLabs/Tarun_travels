@@ -6,8 +6,8 @@ export const siteConfig = {
   description:
     "Reliable airport taxi, local rental and outstation cab services in Bengaluru.",
   category: "Taxi Service",
-  phoneDisplay: "+91 98765 43210",
-  phone: "919876543210",
+  phoneDisplay: "+91 93530 05457",
+  phone: "919353005457",
   email: "hello@taruntravelhub.com",
   address: ["MG Road, Bengaluru", "Karnataka 560001"],
   postalAddress: {

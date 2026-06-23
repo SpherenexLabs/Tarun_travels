@@ -1,8 +1,22 @@
-import { reviews } from "@/data/content";
+import { reviews as staticReviews } from "@/data/content";
 import { siteConfig } from "@/data/site";
+import { getReviews, getSiteSettings } from "@/lib/db";
 import Icon from "@/components/ui/Icon";
 
-export default function ReviewsSection() {
+export default async function ReviewsSection() {
+  const [firebaseReviews, firebaseSettings] = await Promise.all([
+    getReviews(),
+    getSiteSettings(),
+  ]);
+
+  const reviews =
+    firebaseReviews && firebaseReviews.length > 0
+      ? firebaseReviews
+      : staticReviews;
+
+  const googleReviewUrl =
+    firebaseSettings?.googleReviewUrl || siteConfig.googleReviewUrl;
+
   return (
     <section className="reviews section" id="reviews">
       <div className="container review-grid">
@@ -13,10 +27,10 @@ export default function ReviewsSection() {
             Travelled with us? Your honest feedback helps other customers plan
             with confidence.
           </p>
-          {siteConfig.googleReviewUrl && (
+          {googleReviewUrl && (
             <a
               className="btn btn-primary review-button"
-              href={siteConfig.googleReviewUrl}
+              href={googleReviewUrl}
               target="_blank"
               rel="noopener noreferrer"
             >
